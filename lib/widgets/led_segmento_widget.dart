@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LedVertical extends LedWidget {
-  LedVertical(
+class LedSegmentoVertical extends LedSegmentoWidget {
+  LedSegmentoVertical(
       {Key key,
       this.corAtivado,
       this.corDesativado,
@@ -20,7 +20,7 @@ class LedVertical extends LedWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LedWidget(
+    return LedSegmentoWidget(
       corAtivado: corAtivado,
       corDesativado: corDesativado,
       tamanhoLinha: tamanhoLinha,
@@ -31,8 +31,8 @@ class LedVertical extends LedWidget {
   }
 }
 
-class LedHorizontal extends LedWidget {
-  LedHorizontal(
+class LedSegmentoHorizontal extends LedSegmentoWidget {
+  LedSegmentoHorizontal(
       {Key key,
       this.corAtivado,
       this.corDesativado,
@@ -51,7 +51,7 @@ class LedHorizontal extends LedWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LedWidget(
+    return LedSegmentoWidget(
       corAtivado: corAtivado,
       corDesativado: corDesativado,
       tamanhoLinha: tamanhoLinha,
@@ -62,8 +62,8 @@ class LedHorizontal extends LedWidget {
   }
 }
 
-class LedWidget extends StatelessWidget {
-  LedWidget(
+class LedSegmentoWidget extends StatelessWidget {
+  LedSegmentoWidget(
       {Key key,
       this.corAtivado,
       this.corDesativado,
