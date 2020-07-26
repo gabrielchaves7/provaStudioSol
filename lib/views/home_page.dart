@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  dispose(){
+  dispose() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,

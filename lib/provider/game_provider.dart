@@ -19,12 +19,13 @@ class GameProvider extends ChangeNotifier {
 
   Future<void> inicializarNovoJogo() async {
     try {
+      var novoNumeroAleatorio = await obterNumeroAleatorio();
+      _numeroAleatorio = novoNumeroAleatorio.valor;
+
       _palpiteAtual = 0;
       _labelLed = "";
       _palpiteTextController.text = "";
-      var novoNumeroAleatorio = await obterNumeroAleatorio();
       _novaPartidaHabilitada = false;
-      _numeroAleatorio = novoNumeroAleatorio.valor;
     } catch (error) {
       if (error is CustomHttpException) {
         _palpiteAtual = error.statusCode;

@@ -83,7 +83,7 @@ class _GameWidgetState extends State<GameWidget> {
                       String palpite = game.palpite.toString();
                       return LedDisplayWidget(
                         corAtivado: corLed,
-                        corDesativado: Colors.grey,
+                        corDesativado: StudioSolColors.corLedDesabilitado,
                         tamanhoLinha: tamanhoLinhaLed,
                         numero: palpite,
                       );
@@ -99,6 +99,13 @@ class _GameWidgetState extends State<GameWidget> {
                       Flexible(
                         flex: 8,
                         child: TextFormField(
+                          validator: (value) {
+                            if (int.parse(value) > 300) {
+                              return 'Insira um número menor que 300';
+                            }
+
+                            return null;
+                          },
                           obscureText: false,
                           maxLength: 3,
                           decoration: InputDecoration(
@@ -159,30 +166,33 @@ class _GameWidgetState extends State<GameWidget> {
 
   showLedSizePickerDialog() {
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              content: CustomSlider(
-                initialValue: tamanhoLinhaLed,
-                onChanged: (value) {
-                  setState(() {
-                    tamanhoLinhaLed = value;
-                  });
-                },
-              ),
-            ));
+      context: context,
+      builder: (_) => AlertDialog(
+        content: CustomSlider(
+          initialValue: tamanhoLinhaLed,
+          onChanged: (value) {
+            setState(() {
+              tamanhoLinhaLed = value;
+            });
+          },
+        ),
+      ),
+    );
   }
 
   showColorPickerDialog() {
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              content: ColorPicker(
-                  color: corLed,
-                  onChanged: (value) {
-                    setState(() {
-                      corLed = value;
-                    });
-                  }),
-            ));
+      context: context,
+      builder: (_) => AlertDialog(
+        content: ColorPicker(
+          color: corLed,
+          onChanged: (value) {
+            setState(() {
+              corLed = value;
+            });
+          },
+        ),
+      ),
+    );
   }
 }

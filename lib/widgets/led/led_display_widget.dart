@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prova_studio_sol/model/numero_em_led_model.dart';
 import 'package:prova_studio_sol/provider/game_provider.dart';
+import 'package:prova_studio_sol/util/colors.dart';
 import 'package:prova_studio_sol/widgets/led/led_unitario_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -58,7 +59,7 @@ class LedDisplayWidget extends StatelessWidget {
           builder: (context, game, child) {
             if (game.novaPartidaHabilitada) {
               return FlatButton(
-                color: Color.fromRGBO(224, 224, 224, 1),
+                color: StudioSolColors.corBotaoHabilitado,
                 child: Text("Nova partida"),
                 onPressed: () {
                   game.inicializarNovoJogo();
