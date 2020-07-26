@@ -53,7 +53,7 @@ class LedDisplayWidget extends StatelessWidget {
         ),
         Consumer<GameProvider>(
           builder: (context, game, child) {
-            if(game.novaPartidaHabilitada){
+            if (game.novaPartidaHabilitada) {
               return FlatButton(
                 color: Color.fromRGBO(224, 224, 224, 1),
                 child: Text("Nova partida"),

@@ -26,6 +26,7 @@ class LedSegmentoWidget extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
           color: ativado ? corAtivado : corDesativado,
         ),
       ),

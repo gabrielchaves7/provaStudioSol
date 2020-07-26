@@ -43,14 +43,12 @@ class GameProvider extends ChangeNotifier {
   void enviarPalpite(int novoPalpite) {
     this._palpiteAtual = novoPalpite;
 
-    if (acertouPalpite){
+    if (acertouPalpite) {
       _novaPartidaHabilitada = true;
       _labelLed = "Acertou!";
     } else {
-      if(_palpiteAtual > numeroAleatorio)
-        _labelLed = "É menor";
-      if( _palpiteAtual < numeroAleatorio)
-        _labelLed = "É maior";
+      if (_palpiteAtual > numeroAleatorio) _labelLed = "É menor";
+      if (_palpiteAtual < numeroAleatorio) _labelLed = "É maior";
 
       _novaPartidaHabilitada = false;
     }

@@ -75,7 +75,10 @@ class LedUnitarioWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: heightLedVertical + heightLedHorizontal,
+            top: heightLedVertical +
+                heightLedHorizontal +
+                (unidadeEspacamento) -
+                ((heightLedHorizontal - unidadeEspacamento) / 2),
             right: widthLedVertical,
             child: LedSegmentoWidget(
               corAtivado: corAtivado,
