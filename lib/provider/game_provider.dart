@@ -9,7 +9,6 @@ class GameProvider extends ChangeNotifier {
   String _labelLed;
   bool _novaPartidaHabilitada = true;
   TextEditingController _palpiteTextController = TextEditingController();
-  Future<void> _futureInicializarNovoJogo;
 
   int get numeroAleatorio => _numeroAleatorio;
   int get palpite => _palpiteAtual;

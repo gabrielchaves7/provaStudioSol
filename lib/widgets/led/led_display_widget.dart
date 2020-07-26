@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prova_studio_sol/model/numero_em_led_model.dart';
-import 'file:///C:/workfolder/prova_studio_sol/lib/widgets/led/led_unitario_widget.dart';
 import 'package:prova_studio_sol/provider/game_provider.dart';
+import 'package:prova_studio_sol/widgets/led/led_unitario_widget.dart';
 import 'package:provider/provider.dart';
 
 class LedDisplayWidget extends StatelessWidget {

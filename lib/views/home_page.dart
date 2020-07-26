@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prova_studio_sol/provider/game_provider.dart';
-import 'file:///C:/workfolder/prova_studio_sol/lib/widgets/game/game_widget.dart';
+import 'package:prova_studio_sol/widgets/game/game_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
