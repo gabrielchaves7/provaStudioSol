@@ -71,7 +71,7 @@ class _GameWidgetState extends State<GameWidget> {
       body: Align(
         alignment: Alignment.center,
         child: FractionallySizedBox(
-          widthFactor: 0.9,
+          widthFactor: 0.95,
           child: FutureBuilder<void>(
             future: _futureInicializarNovoJogo,
             builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
@@ -93,6 +93,8 @@ class _GameWidgetState extends State<GameWidget> {
 
                 children.add(
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Flexible(
                         flex: 8,

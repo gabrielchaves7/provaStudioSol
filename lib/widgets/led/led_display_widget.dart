@@ -46,10 +46,13 @@ class LedDisplayWidget extends StatelessWidget {
               return Container();
           },
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: children,
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: children,
+          ),
         ),
         Consumer<GameProvider>(
           builder: (context, game, child) {

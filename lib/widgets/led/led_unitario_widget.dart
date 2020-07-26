@@ -20,12 +20,12 @@ class LedUnitarioWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double widthLedVertical =
-        ((MediaQuery.of(context).size.height * 0.01) * tamanhoLinha);
+        ((MediaQuery.of(context).size.width * 0.01) * tamanhoLinha);
     double heightLedVertical = ((MediaQuery.of(context).size.height * 0.08));
 
     double widthLedHorizontal = (MediaQuery.of(context).size.height * 0.08);
     double heightLedHorizontal =
-        ((MediaQuery.of(context).size.height * 0.01) * tamanhoLinha);
+        ((MediaQuery.of(context).size.width * 0.01) * tamanhoLinha);
 
     double unidadeEspacamento = 5;
 
