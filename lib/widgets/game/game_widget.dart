@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:prova_studio_sol/model/numero_aleatorio_model.dart';
-import 'package:prova_studio_sol/repositorio/numero_repositorio.dart';
-import 'file:///C:/workfolder/prova_studio_sol/lib/widgets/led/led_display_widget.dart';
+import 'package:prova_studio_sol/provider/game_provider.dart';
+import 'package:prova_studio_sol/widgets/led/led_display_widget.dart';
+import 'package:provider/provider.dart';
 
-class GameWidget extends StatefulWidget{
+class GameWidget extends StatefulWidget {
   GameWidget({Key key}) : super(key: key);
 
   @override
@@ -12,16 +12,15 @@ class GameWidget extends StatefulWidget{
 }
 
 class _GameWidgetState extends State<GameWidget> {
-  Future<NumeroAleatorioModel> _futureObterNumeroAleatorio;
-  bool acertouPalpite;
-  int palpite;
-  final palpiteController = TextEditingController();
+  Future<void> _futureInicializarNovoJogo;
+  TextEditingController palpiteController;
 
   @override
   void initState() {
-    acertouPalpite = false;
-    _futureObterNumeroAleatorio = obterNumeroAleatorio();
-    palpite = 0;
+    _futureInicializarNovoJogo =
+        Provider.of<GameProvider>(context, listen: false).inicializarNovoJogo();
+    palpiteController =
+        Provider.of<GameProvider>(context, listen: false).palpiteTextController;
     super.initState();
   }
 
@@ -33,50 +32,25 @@ class _GameWidgetState extends State<GameWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<NumeroAleatorioModel>(
+    return FutureBuilder<void>(
       future:
-      _futureObterNumeroAleatorio, // a previously-obtained Future<String> or null
-      builder: (BuildContext context,
-          AsyncSnapshot<NumeroAleatorioModel> snapshot) {
+          _futureInicializarNovoJogo,
+      builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          int numeroAleatorio = snapshot.data.valor;
-          String labelText;
           var children = <Widget>[];
-
-          if (snapshot.hasError)
-            labelText = "Erro";
-          else if (acertouPalpite)
-            labelText = "Acertou!";
-          else if (!acertouPalpite &&
-              palpite > numeroAleatorio &&
-              palpiteController.text.isNotEmpty)
-            labelText = "É menor";
-          else if (!acertouPalpite &&
-              palpite < numeroAleatorio &&
-              palpiteController.text.isNotEmpty) labelText = "É maior";
-
-          children.add(LedDisplayWidget(
-            labelText: labelText,
-            corAtivado: Colors.red,
-            corDesativado: Colors.grey,
-            tamanhoLinha: 1,
-            numero: snapshot.hasError ? "502" : palpite.toString(),
-          ));
-
-          if (acertouPalpite) {
-            children.add(FlatButton(
-              color: Color.fromRGBO(224, 224, 224, 1),
-              child: Text("Nova partida"),
-              onPressed: () {
-                setState(() {
-                  _futureObterNumeroAleatorio = obterNumeroAleatorio();
-                  palpite = 0;
-                  palpiteController.text = "";
-                  acertouPalpite = false;
-                });
+          children.add(
+            Consumer<GameProvider>(
+              builder: (context, game, child) {
+                String palpite = game.palpite.toString();
+                return LedDisplayWidget(
+                  corAtivado: Colors.red,
+                  corDesativado: Colors.grey,
+                  tamanhoLinha: 1,
+                  numero: palpite,
+                );
               },
-            ));
-          }
+            ),
+          );
 
           children.add(
             Row(
@@ -95,18 +69,21 @@ class _GameWidgetState extends State<GameWidget> {
                 ),
                 Flexible(
                   flex: 4,
-                  child: FlatButton(
-                    color: Color.fromRGBO(224, 224, 224, 1),
-                    disabledColor: Color.fromRGBO(154, 154, 154, 1),
-                    child: Text("Enviar"),
-                    onPressed: acertouPalpite
-                        ? null
-                        : () {
-                      setState(() {
-                        palpite = int.parse(palpiteController.text);
-                        acertouPalpite = (palpiteController.text ==
-                            numeroAleatorio.toString());
-                      });
+                  child: Consumer<GameProvider>(
+                    builder: (context, game, child) {
+                      return FlatButton(
+                        color: Color.fromRGBO(224, 224, 224, 1),
+                        disabledColor: Color.fromRGBO(154, 154, 154, 1),
+                        child: Text("Enviar"),
+                        onPressed: game.acertouPalpite
+                            ? null
+                            : () {
+                                setState(() {
+                                  game.enviarPalpite(
+                                      int.parse(palpiteController.text));
+                                });
+                              },
+                      );
                     },
                   ),
                 )
@@ -119,10 +96,16 @@ class _GameWidgetState extends State<GameWidget> {
             children: children,
           );
         } else {
-          return SizedBox(
-            child: CircularProgressIndicator(),
-            width: 60,
-            height: 60,
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                width: 60,
+                height: 60,
+                child: CircularProgressIndicator(),
+              ),
+            ],
           );
         }
       },

@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:prova_studio_sol/model/numero_em_led_model.dart';
 import 'file:///C:/workfolder/prova_studio_sol/lib/widgets/led/led_unitario_widget.dart';
+import 'package:prova_studio_sol/provider/game_provider.dart';
+import 'package:provider/provider.dart';
 
 class LedDisplayWidget extends StatelessWidget {
   LedDisplayWidget(
       {Key key,
-      @required this.labelText,
       this.corAtivado,
       this.corDesativado,
       @required this.tamanhoLinha,
       @required this.numero})
       : super(key: key);
 
-  final String labelText;
   final Color corAtivado;
   final Color corDesativado;
   final double tamanhoLinha;
@@ -37,12 +38,34 @@ class LedDisplayWidget extends StatelessWidget {
 
     return Column(
       children: <Widget>[
-        (labelText != null && labelText.isNotEmpty) ? Text(labelText) : Container(),
+        Consumer<GameProvider>(
+          builder: (context, game, child) {
+            if (game.labelLed.isNotEmpty)
+              return Text(game.labelLed);
+            else
+              return Container();
+          },
+        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: children,
-        )
+        ),
+        Consumer<GameProvider>(
+          builder: (context, game, child) {
+            if(game.novaPartidaHabilitada){
+              return FlatButton(
+                color: Color.fromRGBO(224, 224, 224, 1),
+                child: Text("Nova partida"),
+                onPressed: () {
+                  game.inicializarNovoJogo();
+                },
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
       ],
     );
   }
