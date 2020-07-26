@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:prova_studio_sol/model/numero_em_led_model.dart';
-import 'package:prova_studio_sol/widgets/led_unitario_widget.dart';
+import 'file:///C:/workfolder/prova_studio_sol/lib/widgets/led/led_unitario_widget.dart';
 
 class LedDisplayWidget extends StatelessWidget {
   LedDisplayWidget(
       {Key key,
+      @required this.labelText,
       this.corAtivado,
       this.corDesativado,
       @required this.tamanhoLinha,
       @required this.numero})
       : super(key: key);
 
+  final String labelText;
   final Color corAtivado;
   final Color corDesativado;
   final double tamanhoLinha;
@@ -33,10 +35,15 @@ class LedDisplayWidget extends StatelessWidget {
       ));
     });
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: children,
+    return Column(
+      children: <Widget>[
+        (labelText != null && labelText.isNotEmpty) ? Text(labelText) : Container(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: children,
+        )
+      ],
     );
   }
 

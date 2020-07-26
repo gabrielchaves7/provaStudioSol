@@ -1,14 +1,18 @@
 import 'dart:convert';
 
+import 'package:flutter_flavor/flutter_flavor.dart';
 import 'package:http/http.dart' as http;
+import 'package:prova_studio_sol/model/numero_aleatorio_model.dart';
 
-Future<int> obterNumeroAleatorio() async {
+Future<NumeroAleatorioModel> obterNumeroAleatorio() async {
   final response = await http.get(
-      'https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300');
+      '${FlavorConfig.instance.variables["apiRandNumber"]}/rand?min=1&max=300');
 
   if (response.statusCode == 200) {
-    return json.decode(response.body)["value"];
+    Map decodedJson = json.decode(response.body);
+
+    return NumeroAleatorioModel.fromJson(decodedJson);
   } else {
-    throw Exception('Failed to load album');
+    throw Exception('Ocorreu um erro ao gerar o número aleatório.');
   }
 }

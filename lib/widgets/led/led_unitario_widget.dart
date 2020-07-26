@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prova_studio_sol/model/numero_em_led_model.dart';
-import 'package:prova_studio_sol/widgets/led_segmento_widget.dart';
+import 'file:///C:/workfolder/prova_studio_sol/lib/widgets/led/led_segmento_widget.dart';
 
 class LedUnitarioWidget extends StatelessWidget {
   LedUnitarioWidget(
@@ -39,25 +39,25 @@ class LedUnitarioWidget extends StatelessWidget {
           Positioned(
             top: 0,
             right: widthLedVertical,
-            child: LedSegmentoHorizontal(
+            child: LedSegmentoWidget(
               corAtivado: corAtivado,
               corDesativado: corDesativado,
               tamanhoLinha: tamanhoLinha,
               ativado: numeroEmLed.ledHorizontalUm,
-              widthLedHorizontal: widthLedHorizontal,
-              heightLedHorizontal: heightLedHorizontal,
+              width: widthLedHorizontal,
+              height: heightLedHorizontal,
             ),
           ),
           Positioned(
             top: heightLedHorizontal + unidadeEspacamento,
             right: 0,
-            child: LedSegmentoVertical(
+            child: LedSegmentoWidget(
               corAtivado: corAtivado,
               corDesativado: corDesativado,
               tamanhoLinha: tamanhoLinha,
               ativado: numeroEmLed.ledVerticalDois,
-              widthLedVertical: widthLedVertical,
-              heightLedVertical: heightLedVertical,
+              width: widthLedVertical,
+              height: heightLedVertical,
             ),
           ),
           Positioned(
@@ -65,37 +65,37 @@ class LedUnitarioWidget extends StatelessWidget {
                 heightLedVertical +
                 (unidadeEspacamento * 2)),
             right: 0,
-            child: LedSegmentoVertical(
+            child: LedSegmentoWidget(
               corAtivado: corAtivado,
               corDesativado: corDesativado,
               tamanhoLinha: tamanhoLinha,
               ativado: numeroEmLed.ledVerticalQuatro,
-              widthLedVertical: widthLedVertical,
-              heightLedVertical: heightLedVertical,
+              width: widthLedVertical,
+              height: heightLedVertical,
             ),
           ),
           Positioned(
             top: heightLedVertical + heightLedHorizontal,
             right: widthLedVertical,
-            child: LedSegmentoHorizontal(
+            child: LedSegmentoWidget(
               corAtivado: corAtivado,
               corDesativado: corDesativado,
               tamanhoLinha: tamanhoLinha,
               ativado: numeroEmLed.ledHorizontalDois,
-              widthLedHorizontal: widthLedHorizontal,
-              heightLedHorizontal: heightLedHorizontal,
+              width: widthLedHorizontal,
+              height: heightLedHorizontal,
             ),
           ),
           Positioned(
             top: heightLedHorizontal + unidadeEspacamento,
             right: (widthLedVertical + widthLedHorizontal),
-            child: LedSegmentoVertical(
+            child: LedSegmentoWidget(
               corAtivado: corAtivado,
               corDesativado: corDesativado,
               tamanhoLinha: tamanhoLinha,
               ativado: numeroEmLed.ledVerticalUm,
-              widthLedVertical: widthLedVertical,
-              heightLedVertical: heightLedVertical,
+              width: widthLedVertical,
+              height: heightLedVertical,
             ),
           ),
           Positioned(
@@ -103,13 +103,13 @@ class LedUnitarioWidget extends StatelessWidget {
                 heightLedVertical +
                 (unidadeEspacamento * 2)),
             right: (widthLedVertical + widthLedHorizontal),
-            child: LedSegmentoVertical(
+            child: LedSegmentoWidget(
               corAtivado: corAtivado,
               corDesativado: corDesativado,
               tamanhoLinha: tamanhoLinha,
               ativado: numeroEmLed.ledVerticalTres,
-              widthLedVertical: widthLedVertical,
-              heightLedVertical: heightLedVertical,
+              width: widthLedVertical,
+              height: heightLedVertical,
             ),
           ),
           Positioned(
@@ -117,13 +117,13 @@ class LedUnitarioWidget extends StatelessWidget {
                 (heightLedHorizontal) +
                 (unidadeEspacamento * 3),
             right: widthLedVertical,
-            child: LedSegmentoHorizontal(
+            child: LedSegmentoWidget(
               corAtivado: corAtivado,
               corDesativado: corDesativado,
               tamanhoLinha: tamanhoLinha,
               ativado: numeroEmLed.ledHorizontalTres,
-              widthLedHorizontal: widthLedHorizontal,
-              heightLedHorizontal: heightLedHorizontal,
+              width: widthLedHorizontal,
+              height: heightLedHorizontal,
             ),
           ),
         ],
