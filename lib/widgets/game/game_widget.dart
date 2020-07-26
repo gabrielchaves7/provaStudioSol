@@ -99,13 +99,6 @@ class _GameWidgetState extends State<GameWidget> {
                       Flexible(
                         flex: 8,
                         child: TextFormField(
-                          validator: (value) {
-                            if (int.parse(value) > 300) {
-                              return 'Insira um número menor que 300';
-                            }
-
-                            return null;
-                          },
                           obscureText: false,
                           maxLength: 3,
                           decoration: InputDecoration(
