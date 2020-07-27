@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prova_studio_sol/exception/custom_http_exception.dart';
 
 import 'package:prova_studio_sol/repositorio/numero_repositorio.dart';
+import 'package:prova_studio_sol/util/colors.dart';
 
 class GameProvider extends ChangeNotifier {
   int _numeroAleatorio;
@@ -9,6 +10,8 @@ class GameProvider extends ChangeNotifier {
   String _labelLed;
   bool _novaPartidaHabilitada = true;
   TextEditingController _palpiteTextController = TextEditingController();
+  Color _corLed = StudioSolColors.corPadrao;
+  double _tamanhoLinhaLed = 2;
 
   int get numeroAleatorio => _numeroAleatorio;
   int get palpite => _palpiteAtual;
@@ -16,6 +19,8 @@ class GameProvider extends ChangeNotifier {
   String get labelLed => _labelLed;
   bool get novaPartidaHabilitada => _novaPartidaHabilitada;
   TextEditingController get palpiteTextController => _palpiteTextController;
+  Color get corLed => _corLed;
+  double get tamanhoLinhaLed => _tamanhoLinhaLed;
 
   Future<void> inicializarNovoJogo() async {
     try {
@@ -34,7 +39,7 @@ class GameProvider extends ChangeNotifier {
         _palpiteAtual = 0;
         _labelLed = "Erro desconhecido";
       }
-
+      _palpiteTextController.text = "";
       _novaPartidaHabilitada = true;
     }
 
@@ -54,6 +59,16 @@ class GameProvider extends ChangeNotifier {
       _novaPartidaHabilitada = false;
     }
 
+    notifyListeners();
+  }
+
+  void alterarCorLed(Color novaCor) {
+    _corLed = novaCor;
+    notifyListeners();
+  }
+
+  void alterarTamanhoLinhaLed(double novoTamanho) {
+    _tamanhoLinhaLed = novoTamanho;
     notifyListeners();
   }
 }

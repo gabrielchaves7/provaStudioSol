@@ -1,32 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prova_studio_sol/model/numero_em_led_model.dart';
-import 'package:prova_studio_sol/provider/game_provider.dart';
 import 'package:prova_studio_sol/util/colors.dart';
 import 'package:prova_studio_sol/widgets/led/led_unitario_widget.dart';
-import 'package:provider/provider.dart';
 
 class LedDisplayWidget extends StatelessWidget {
   LedDisplayWidget(
       {Key key,
       this.corAtivado,
       this.corDesativado,
+      this.labelLed,
+      this.novaPartidaHabilitada,
       @required this.tamanhoLinha,
-      @required this.numero})
+      @required this.numero,
+      @required this.novoJogo})
       : super(key: key);
 
   final Color corAtivado;
   final Color corDesativado;
+  final String labelLed;
+  final bool novaPartidaHabilitada;
   final double tamanhoLinha;
   final String numero;
+  final Function novoJogo;
 
   @override
   Widget build(BuildContext context) {
     var listaNumeroEmLed = converterNumeroEmLed(numero);
-    var children = <Widget>[];
+    var columnChildren = <Widget>[];
+    var rowChildren = <Widget>[];
+
+    if (labelLed.isNotEmpty) columnChildren.add(Text(labelLed));
 
     listaNumeroEmLed.forEach((numeroEmLed) {
-      children.add(Padding(
+      rowChildren.add(Padding(
         padding: EdgeInsets.all(4),
         child: LedUnitarioWidget(
           corAtivado: corAtivado,
@@ -37,40 +44,27 @@ class LedDisplayWidget extends StatelessWidget {
       ));
     });
 
+    columnChildren.add(SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: rowChildren,
+      ),
+    ));
+
+    if (novaPartidaHabilitada) {
+      columnChildren.add(FlatButton(
+        color: StudioSolColors.corBotaoHabilitado,
+        child: Text("Nova partida"),
+        onPressed: () {
+          novoJogo();
+        },
+      ));
+    }
+
     return Column(
-      children: <Widget>[
-        Consumer<GameProvider>(
-          builder: (context, game, child) {
-            if (game.labelLed.isNotEmpty)
-              return Text(game.labelLed);
-            else
-              return Container();
-          },
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: children,
-          ),
-        ),
-        Consumer<GameProvider>(
-          builder: (context, game, child) {
-            if (game.novaPartidaHabilitada) {
-              return FlatButton(
-                color: StudioSolColors.corBotaoHabilitado,
-                child: Text("Nova partida"),
-                onPressed: () {
-                  game.inicializarNovoJogo();
-                },
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
-      ],
+      children: columnChildren,
     );
   }
 
