@@ -31,13 +31,18 @@ a reutilização e também a evolução do projeto. Por isso, criei uma widget q
 exibir este número.
  
 Desse jeito, fica fácil criar outras widgets de led, por exemplo um led de letras, reaproveitando o 
-LED_SEGMENTO_WIDGET, ou até exibir um número maior, visto que a **led_display_widget**, não limita o 
+**led_segmento_widget**, ou até exibir um número maior, visto que a **led_display_widget**, não limita o 
 tamanho do número que ela pode receber, essa limitação é feita no text_form_field do palpite.
 
-Agora explciando um pouco melhor o **led_unitario_widget**, ele recebe uma classe, 
+Agora explicando um pouco melhor o **led_unitario_widget**, ele recebe uma classe, 
 **numero_em_led_model** como parâmetro, que fala pra ele qual segmento do led ele têm que acender e 
 qual ele irá apagar. Abaixo têm uma imagem que explica melhor a ordem dos segmentos. 
+
+
 ![Imagem explicativa do model do led](imagem_explicativa_led.png)
+
+Além disso, o **numero_em_led_model** possui construtores para os números de 0 a 9 com os valores 
+certos para exibir esse número no **led_unitario_widget**.
 
 
 
