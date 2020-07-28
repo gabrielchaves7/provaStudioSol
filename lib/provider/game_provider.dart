@@ -9,6 +9,7 @@ class GameProvider extends ChangeNotifier {
   int _palpiteAtual;
   String _labelLed;
   bool _novaPartidaHabilitada = true;
+  bool _botaoEnviarHabilitado = true;
   TextEditingController _palpiteTextController = TextEditingController();
   Color _corLed = StudioSolColors.corPadrao;
   double _tamanhoLinhaLed = 2;
@@ -21,6 +22,7 @@ class GameProvider extends ChangeNotifier {
   TextEditingController get palpiteTextController => _palpiteTextController;
   Color get corLed => _corLed;
   double get tamanhoLinhaLed => _tamanhoLinhaLed;
+  bool get botaoEnviarHabilitado => _botaoEnviarHabilitado;
 
   Future<void> inicializarNovoJogo() async {
     try {
@@ -31,6 +33,7 @@ class GameProvider extends ChangeNotifier {
       _labelLed = "";
       _palpiteTextController.text = "";
       _novaPartidaHabilitada = false;
+      _botaoEnviarHabilitado = true;
     } catch (error) {
       if (error is CustomHttpException) {
         _palpiteAtual = error.statusCode;
@@ -41,6 +44,7 @@ class GameProvider extends ChangeNotifier {
       }
       _palpiteTextController.text = "";
       _novaPartidaHabilitada = true;
+      _botaoEnviarHabilitado = false;
     }
 
     notifyListeners();
@@ -52,11 +56,10 @@ class GameProvider extends ChangeNotifier {
     if (acertouPalpite) {
       _novaPartidaHabilitada = true;
       _labelLed = "Acertou!";
+      _botaoEnviarHabilitado = false;
     } else {
       if (_palpiteAtual > numeroAleatorio) _labelLed = "É menor";
       if (_palpiteAtual < numeroAleatorio) _labelLed = "É maior";
-
-      _novaPartidaHabilitada = false;
     }
 
     notifyListeners();

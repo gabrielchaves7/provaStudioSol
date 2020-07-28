@@ -135,14 +135,14 @@ class _GameWidgetState extends State<GameWidget> {
                         color: StudioSolColors.corBotaoHabilitado,
                         disabledColor: StudioSolColors.corBotaoDesabilitado,
                         child: Text("Enviar"),
-                        onPressed: game.acertouPalpite
-                            ? null
-                            : () {
+                        onPressed: game.botaoEnviarHabilitado
+                            ? () {
                                 setState(() {
                                   game.enviarPalpite(
                                       int.parse(palpiteController.text));
                                 });
-                              },
+                              }
+                            : null,
                       );
                     }),
                   )
