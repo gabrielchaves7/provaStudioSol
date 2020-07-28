@@ -17,6 +17,7 @@ class GameWidget extends StatefulWidget {
 class _GameWidgetState extends State<GameWidget> {
   TextEditingController palpiteController;
   Future<void> futureInicializarNovoJogo;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -117,14 +118,24 @@ class _GameWidgetState extends State<GameWidget> {
                 children: <Widget>[
                   Flexible(
                     flex: 8,
-                    child: TextFormField(
-                      obscureText: false,
-                      maxLength: 3,
-                      decoration: InputDecoration(
-                        labelText: 'Digite o palpite',
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        obscureText: false,
+                        maxLength: 3,
+                        decoration: InputDecoration(
+                          labelText: 'Digite o palpite',
+                        ),
+                        keyboardType: TextInputType.number,
+                        controller: palpiteController,
+                        validator: (value) {
+                          if (int.parse(value) > 300) {
+                            return "Digite um número entre 1 e 300";
+                          }
+
+                          return null;
+                        },
                       ),
-                      keyboardType: TextInputType.number,
-                      controller: palpiteController,
                     ),
                   ),
                   Flexible(
@@ -137,10 +148,12 @@ class _GameWidgetState extends State<GameWidget> {
                         child: Text("Enviar"),
                         onPressed: game.botaoEnviarHabilitado
                             ? () {
-                                setState(() {
-                                  game.enviarPalpite(
-                                      int.parse(palpiteController.text));
-                                });
+                                if (_formKey.currentState.validate()) {
+                                  setState(() {
+                                    game.enviarPalpite(
+                                        int.parse(palpiteController.text));
+                                  });
+                                }
                               }
                             : null,
                       );
@@ -176,8 +189,9 @@ class _GameWidgetState extends State<GameWidget> {
       context: context,
       builder: (_) => AlertDialog(
         content: CircleColorPicker(
-          initialColor: Provider.of<GameProvider>(context, listen: false).corLed,
-          onChanged: (color){
+          initialColor:
+              Provider.of<GameProvider>(context, listen: false).corLed,
+          onChanged: (color) {
             Provider.of<GameProvider>(context, listen: false)
                 .alterarCorLed(color);
           },
