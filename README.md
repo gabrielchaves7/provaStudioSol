@@ -37,7 +37,7 @@ tamanho do número que ela pode receber, essa limitação é feita no text_form_
 Agora explciando um pouco melhor o **led_unitario_widget**, ele recebe uma classe, 
 **numero_em_led_model** como parâmetro, que fala pra ele qual segmento do led ele têm que acender e 
 qual ele irá apagar. Abaixo têm uma imagem que explica melhor a ordem dos segmentos. 
-![Imagem explicativa do model do led](imagem_explicativa_led.png?raw=true "Imagem explicativa do model do LED.")
+![Imagem explicativa do model do led](imagem_explicativa_led.png)
 
 
 
