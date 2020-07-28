@@ -26,13 +26,18 @@ O projeto foi organizado de modo que:
 
 Ao começar a desenvolver a widget relativa ao led, eu decidi separar isso em partes, para facilitar
 a reutilização e também a evolução do projeto. Por isso, criei uma widget que representa os segmentos, 
-LED_SEGMENTO_WIDGET, uma outra que representa apenas um dígito, LED_UNITARIO_WIDGET, e por fim a 
-LED_DISPLAY_WIDGET, que recebe um número e calcula quantos LED_UNITARIO_WIDGET ela vai precisar para 
+**led_segmento_widget**, uma outra que representa apenas um dígito, **led_unitario_wdiget**, e por fim a 
+**led_display_widget**, que recebe um número e calcula quantos **led_unitario_wdiget** ela vai precisar para 
 exibir este número.
  
 Desse jeito, fica fácil criar outras widgets de led, por exemplo um led de letras, reaproveitando o 
-LED_SEGMENTO_WIDGET, ou até exibir um número maior, visto que a LED_DISPLAY_WIDGET não limita o 
+LED_SEGMENTO_WIDGET, ou até exibir um número maior, visto que a **led_display_widget**, não limita o 
 tamanho do número que ela pode receber, essa limitação é feita no text_form_field do palpite.
+
+Agora explciando um pouco melhor o **led_unitario_widget**, ele recebe uma classe, 
+**numero_em_led_model** como parâmetro, que fala pra ele qual segmento do led ele têm que acender e 
+qual ele irá apagar. Abaixo têm uma imagem que explica melhor a ordem dos segmentos. 
+![Imagem explicativa do model do led](imagem_explicativa_led.png?raw=true "Imagem explicativa do model do LED.")
 
 
 
