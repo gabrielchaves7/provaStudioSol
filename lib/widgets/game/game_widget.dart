@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
+import 'package:flutter_circle_color_picker/flutter_circle_color_picker.dart';
 import 'package:prova_studio_sol/provider/game_provider.dart';
 import 'package:prova_studio_sol/util/colors.dart';
 import 'package:prova_studio_sol/widgets/led/led_display_widget.dart';
@@ -175,12 +175,15 @@ class _GameWidgetState extends State<GameWidget> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        content: ColorPicker(
-          color: Provider.of<GameProvider>(context, listen: false).corLed,
-          onChanged: (value) {
+        content: CircleColorPicker(
+          initialColor: Provider.of<GameProvider>(context, listen: false).corLed,
+          onChanged: (color){
             Provider.of<GameProvider>(context, listen: false)
-                .alterarCorLed(value);
+                .alterarCorLed(color);
           },
+          size: const Size(240, 240),
+          strokeWidth: 4,
+          thumbSize: 36,
         ),
       ),
     );

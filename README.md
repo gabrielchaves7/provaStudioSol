@@ -45,4 +45,8 @@ Além disso, o **numero_em_led_model** possui construtores para os números de 0
 certos para exibir esse número no **led_unitario_widget**.
 
 
+### Pacotes utilizados
 
+- provider: https://flutter.dev/docs/development/data-and-backend/state-mgmt/simple  
+- http: https://pub.dev/packages/http/install
+- flutter_circle_color_picker: https://pub.dev/packages/flutter_circle_color_picker
